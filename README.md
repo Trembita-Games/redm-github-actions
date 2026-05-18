@@ -1,5 +1,7 @@
 # RedM GitHub Actions
 
+[![Validate Repository](https://github.com/Trembita-Games/redm-github-actions/actions/workflows/validate.yaml/badge.svg)](https://github.com/Trembita-Games/redm-github-actions/actions/workflows/validate.yaml)
+
 Reusable GitHub Actions workflows for Trembita Games RedM/RDR2 repositories.
 
 This repository contains shared validation workflows used by public RedM/RDR2 repositories to avoid duplicating the same repository checks in every project.

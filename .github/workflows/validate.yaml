@@ -1,0 +1,70 @@
+﻿name: Validate Repository
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate reusable actions repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Validate repository files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          required_files=(
+            ".editorconfig"
+            ".gitattributes"
+            ".gitignore"
+            "README.md"
+            ".github/workflows/validate.yaml"
+            ".github/workflows/validate-redm-bootstrap.yaml"
+            ".github/workflows/validate-redm-resources.yaml"
+            ".github/workflows/validate-redm-cfx-data.yaml"
+            ".github/workflows/validate-redm-recipes.yaml"
+          )
+
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "::error file=$file::Required file is missing"
+              exit 1
+            fi
+          done
+
+      - name: Validate reusable workflow declarations
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          reusable_workflows=(
+            ".github/workflows/validate-redm-bootstrap.yaml"
+            ".github/workflows/validate-redm-resources.yaml"
+            ".github/workflows/validate-redm-cfx-data.yaml"
+            ".github/workflows/validate-redm-recipes.yaml"
+          )
+
+          for workflow in "${reusable_workflows[@]}"; do
+            if ! grep -q "workflow_call:" "$workflow"; then
+              echo "::error file=$workflow::Reusable workflow must declare workflow_call"
+              exit 1
+            fi
+          done
+
+      - name: Run actionlint
+        uses: eifinger/actionlint-action@v1
