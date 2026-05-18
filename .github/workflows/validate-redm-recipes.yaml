@@ -1,0 +1,30 @@
+﻿name: Validate RedM txAdmin Recipes Repository
+
+on:
+  workflow_call:
+    inputs:
+      validate_yaml:
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate txAdmin recipes repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout caller repository
+        uses: actions/checkout@v5
+
+      - name: Validation placeholder
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          echo "txAdmin recipes repository validation placeholder."
+          echo "YAML validation enabled: ${{ inputs.validate_yaml }}"
+          echo "Validation rules will be added in a later commit."

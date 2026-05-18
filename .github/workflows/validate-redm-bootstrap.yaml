@@ -1,0 +1,35 @@
+﻿name: Validate RedM Bootstrap Repository
+
+on:
+  workflow_call:
+    inputs:
+      default_profile:
+        required: false
+        type: string
+        default: dev
+      validate_docker:
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate bootstrap repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout caller repository
+        uses: actions/checkout@v5
+
+      - name: Validation placeholder
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          echo "Bootstrap repository validation placeholder."
+          echo "Default profile: ${{ inputs.default_profile }}"
+          echo "Docker validation enabled: ${{ inputs.validate_docker }}"
+          echo "Validation rules will be added in a later commit."

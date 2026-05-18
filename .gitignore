@@ -1,0 +1,14 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+
+# Rider / IntelliJ local files
+.idea/
+
+# Archives generated locally
+*.7z
+*.rar
+*.zip

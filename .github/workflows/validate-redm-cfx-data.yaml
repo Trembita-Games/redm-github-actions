@@ -1,0 +1,30 @@
+﻿name: Validate RedM CFX Data Repository
+
+on:
+  workflow_call:
+    inputs:
+      validate_source_attribution:
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate CFX data repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout caller repository
+        uses: actions/checkout@v5
+
+      - name: Validation placeholder
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          echo "CFX data repository validation placeholder."
+          echo "Source attribution validation enabled: ${{ inputs.validate_source_attribution }}"
+          echo "Validation rules will be added in a later commit."
